@@ -1,0 +1,66 @@
+div#header
+	h1
+		span#logo
+			img(src="images/logo.png")
+		= title
+		span#logo
+			img(src="images/logo.png")
+
+div#wrap
+	div#portrait
+		img(src="images/maroney2.png")
+
+div#info
+	p Welcome to #{title}. A Site where you have a opportunity to vote on the many Ties of Bernie Maroney.
+
+div#info
+	h2 About Bernie
+	ul
+		li Engineer / MBA / Consultant with more than 10 years experience
+		li Instructor for the SFU Summer in Innovation, representing the Beedie School of Buisness
+		li World reknowned Tie enthusiast
+
+
+div.link
+	a#btn_all_ties(href="/all_ties") Visit Tie List
+
+div#randomvote
+
+	div#randomimage
+		img(class='tie_img', src='#{tie.attributes.imageurl}')
+	
+	- if(tie.average() === null)
+	
+		span.norating  No votes yet
+		
+		span.rating
+	
+		form(method="post", action="all_ties", name="rate")
+			input(type="hidden", name="id", value="#{tie.attributes.name}")
+	
+			span.vote
+	
+	
+			- for(var i=1; i<=10; i++)
+				input(type="submit", name="vote", value=i)
+	
+		span.name
+			#{tie.attributes.name}
+					
+	- else
+		
+		span.showrating #{tie.average()}
+		
+		span.rating
+		form(method="post", action="all_ties", name="rate")
+			input(type="hidden", name="id", value="#{tie.attributes.name}")
+	
+			span.vote
+			- for(var i=1; i<=10; i++)
+				input(type="submit", name="vote", value=i)
+	
+		span.name
+			#{tie.attributes.name}
+
+div#footer
+	p Semester in Innovation - 2012
